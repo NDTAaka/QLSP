@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const port = process.env.PORT;
 
+app.use(express.static("public"));
 app.set("views", "./views");
 app.set("view engine", "pug");
 
