@@ -4,6 +4,8 @@ const app = express();
 require("dotenv").config();
 
 const port = process.env.PORT;
+const database = require("./config/database");
+database.connect();
 
 app.use(express.static("public"));
 app.set("views", "./views");
