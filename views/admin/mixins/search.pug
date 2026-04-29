@@ -1,0 +1,15 @@
+mixin search(keyword)
+  form.product-filter__search(id="form-search")
+    label.product-filter__search-label(for="keyword-search") Tìm kiếm
+    input#keyword-search.product-manage__search(
+      type="text"
+      placeholder="Nhập tên sản phẩm..."
+      name="keyword"
+      class="form-control"
+      value=keyword
+      )
+    ul(id="results-search")
+      button.product-manage__add(
+      type="submit"
+      class="btn"
+      ) Tìm

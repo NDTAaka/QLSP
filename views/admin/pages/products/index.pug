@@ -1,0 +1,64 @@
+﻿extends ../../layouts/default.pug
+include ../../mixins/filter-status.pug
+include ../../mixins/search.pug
+block main
+  section.product-manage
+    .product-manage__head
+      .product-manage__title-wrap
+        h1.product-manage__title Quản Lý Sản Phẩm
+        p.product-manage__desc Theo dõi danh sách, lọc theo trạng thái và tìm sản phẩm nhanh.
+
+    .product-filter
+      .product-filter__head Bộ lọc và tìm kiếm
+      .product-filter__body
+        .product-filter__status
+          +filter-status(filterStatus)
+        +search(keyword)
+
+    .product-manage__table-wrap
+      table.product-table
+        thead
+          tr
+            th Mã SP
+            th Hình Ảnh
+            th Tên SP
+            th Danh mục
+            th Giá
+            th Stock
+            th Trạng Thái
+            th Cập Nhật
+            th Tác Vụ
+        tbody
+          each product in products
+            - const availabilityRaw = String(product.availabilityStatus || "").toLowerCase().trim()
+            - const availabilityNormalized = availabilityRaw.replace(/[\s_-]+/g, "")
+            - const availabilityClass = (availabilityNormalized === "instock" || availabilityNormalized === "available") ? "instock" : ((availabilityNormalized === "outstock" || availabilityNormalized === "outofstock" || availabilityNormalized === "unavailable") ? "outstock" : availabilityNormalized)
+            tr
+              td= "#" + product.id
+              td
+                img(src=product.thumbnail, alt=product.title, width="50", height="50")
+              td= product.title
+              td= product.category
+              td= product.price
+              td= product.stock
+              td
+                span(class=`badge-status badge-status--${availabilityClass}`)= product.availabilityStatus
+              td
+                span(class=`badge-status badge-status--${product.status}`)= product.status
+              td
+                .table-actions
+                  a(href="#") Sửa
+                  a(href="#") Xoá
+
+    nav 
+      ul.pagination
+        li.page-item
+          button.page-link(href="#") Trước
+        li.page-item
+          button.page-link(href="#") 1
+        li.page-item
+          button.page-link(href="#") 2
+        li.page-item
+          button.page-link(href="#") 3
+        li.page-item
+          button.page-link(href="#") Sau

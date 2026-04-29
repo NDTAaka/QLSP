@@ -3,11 +3,14 @@ const productSchema = new mongoose.Schema(
   {
     title: String,
     description: String,
+    category: String,
     price: Number,
     discountPercentage: Number,
+    stock: Number,
     thumbnail: String,
-    status: String,
     position: Number,
+    availabilityStatus: String,
+    status: String,
     deleted: Boolean
   }
 );
